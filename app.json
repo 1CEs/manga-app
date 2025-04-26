@@ -12,7 +12,8 @@
       "tsconfigPaths": true
     },
 
-    "plugins": [],
+    "plugins": [
+    ],
 
     "orientation": "portrait",
     "icon": "./assets/icon.png",

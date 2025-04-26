@@ -1,31 +1,24 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { View, Text, TextInput, Image, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
-import { db } from "../db/db";
+import { useTokenStore } from "../store/token.store";
 
-export const Init = () => {
-    const [providerUrl, setProviderUrl] = useState("");
-    const [authToken, setAuthToken] = useState("");
+export const Init = ({ navigation }: { navigation: any }) => {
+    const [inputToken, setInputToken] = useState("");
+    const { token, setToken } = useTokenStore();
 
     useEffect(() => {
-        // Load saved data when component mounts
-        const loadSavedData = async () => {
-            const savedUrl = await db.getProviderUrl();
-            const savedToken = await db.getAuthToken();
-            if (savedUrl) setProviderUrl(savedUrl);
-            if (savedToken) setAuthToken(savedToken);
-        };
-        loadSavedData();
-    }, []);
+        if (token) {
+            setInputToken(token);
+            navigation.navigate('Layout');
+        }
+    }, [token]);
 
     const handleStart = async () => {
         try {
-            // Save the provider URL and auth token
-            await db.saveProviderUrl(providerUrl);
-            await db.saveAuthToken(authToken);
-            // TODO: Add navigation or other logic after saving
+            await setToken(inputToken);
         } catch (error) {
-            console.error('Error saving data:', error);
+            console.error('Error saving token:', error);
         }
     };
 
@@ -36,17 +29,10 @@ export const Init = () => {
                 <Image source={require('assets/img/manhwa.png')} className="w-full h-48" />
                 <TextInput
                     className="text-foreground text-md w-full rounded-lg border border-gray-300 p-2 placeholder:text-center"
-                    placeholder="Manga Provider URL"
-                    placeholderTextColor="gray"
-                    value={providerUrl}
-                    onChangeText={setProviderUrl}
-                />
-                <TextInput
-                    className="text-foreground text-md w-full rounded-lg border border-gray-300 p-2 placeholder:text-center"
                     placeholder="Authorization Token"
                     placeholderTextColor="gray"
-                    value={authToken}
-                    onChangeText={setAuthToken}
+                    value={inputToken}
+                    onChangeText={setInputToken}
                     secureTextEntry
                 />
                 <View className="rounded-lg overflow-hidden">
