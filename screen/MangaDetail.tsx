@@ -20,16 +20,72 @@ export const MangaDetail = () => {
     if (loading) {
         return (
             <SafeAreaView className="flex-1 pt-10 bg-background">
-                <View className="flex-1 px-4">
-                    <View className="flex-row gap-x-4">
-                        <View className="w-32 h-48 rounded-lg bg-gray-200 animate-pulse" />
-                        <View className="flex-1">
-                            <View className="w-3/4 h-6 bg-gray-200 rounded-md mb-2 animate-pulse" />
-                            <View className="w-1/4 h-4 bg-gray-200 rounded-md mb-2 animate-pulse" />
-                            <View className="w-1/2 h-4 bg-gray-200 rounded-md animate-pulse" />
+                <ScrollView className="flex-1" nestedScrollEnabled>
+                    <View className="flex-1 px-4">
+                        {/* Header Section Skeleton */}
+                        <View className="flex-row gap-x-4 mb-6">
+                            <View className="w-32 h-48 rounded-lg bg-gray-200 animate-pulse" />
+                            <View className="flex-1 gap-y-2">
+                                <View className="w-3/4 h-6 bg-gray-200 rounded-md animate-pulse" />
+                                <View className="w-1/4 h-4 bg-gray-200 rounded-md animate-pulse" />
+                                <View className="w-1/2 h-4 bg-gray-200 rounded-md animate-pulse" />
+                                <View className="w-1/3 h-4 bg-gray-200 rounded-md animate-pulse" />
+                                <View className="flex-row gap-x-2 mt-2">
+                                    <View className="w-20 h-8 bg-gray-200 rounded-md animate-pulse" />
+                                    <View className="w-20 h-8 bg-gray-200 rounded-md animate-pulse" />
+                                </View>
+                            </View>
+                        </View>
+
+                        {/* Description Section Skeleton */}
+                        <View className="mb-6">
+                            <View className="w-1/4 h-6 bg-gray-200 rounded-md mb-2 animate-pulse" />
+                            <View className="w-full h-4 bg-gray-200 rounded-md mb-1 animate-pulse" />
+                            <View className="w-5/6 h-4 bg-gray-200 rounded-md mb-1 animate-pulse" />
+                            <View className="w-4/6 h-4 bg-gray-200 rounded-md animate-pulse" />
+                        </View>
+
+                        {/* Details Table Skeleton */}
+                        <View className="mb-6">
+                            <View className="w-1/4 h-6 bg-gray-200 rounded-md mb-2 animate-pulse" />
+                            <View className="bg-gray-800 rounded-lg p-4">
+                                {[1, 2, 3, 4].map((_, index) => (
+                                    <View key={index} className="flex-row mb-3 last:mb-0">
+                                        <View className="w-1/3">
+                                            <View className="w-3/4 h-4 bg-gray-200 rounded-md animate-pulse" />
+                                        </View>
+                                        <View className="flex-1">
+                                            <View className="w-1/2 h-4 bg-gray-200 rounded-md animate-pulse" />
+                                        </View>
+                                    </View>
+                                ))}
+                            </View>
+                        </View>
+
+                        {/* Genres Section Skeleton */}
+                        <View className="mb-6">
+                            <View className="w-1/4 h-6 bg-gray-200 rounded-md mb-2 animate-pulse" />
+                            <View className="flex-row flex-wrap gap-2">
+                                {[1, 2, 3, 4, 5].map((_, index) => (
+                                    <View key={index} className="w-20 h-6 bg-gray-200 rounded-md animate-pulse" />
+                                ))}
+                            </View>
+                        </View>
+
+                        {/* Chapters Section Skeleton */}
+                        <View className="mb-6">
+                            <View className="w-1/4 h-6 bg-gray-200 rounded-md mb-2 animate-pulse" />
+                            <View className="flex-col gap-y-2">
+                                {[1, 2, 3, 4, 5].map((_, index) => (
+                                    <View key={index} className="bg-gray-800 rounded-lg p-3">
+                                        <View className="w-3/4 h-4 bg-gray-200 rounded-md mb-1 animate-pulse" />
+                                        <View className="w-1/4 h-3 bg-gray-200 rounded-md animate-pulse" />
+                                    </View>
+                                ))}
+                            </View>
                         </View>
                     </View>
-                </View>
+                </ScrollView>
             </SafeAreaView>
         );
     }

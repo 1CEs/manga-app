@@ -65,7 +65,7 @@ export const RecentlySection = () => {
                         Array.from({ length: 12 }).map((_, index) => (
                             <View
                                 key={index}
-                                className="w-full h-fit rounded-md relative bg-gray-200 animate-pulse flex-row items-start"
+                                className="w-full h-fit rounded-md relative animate-pulse flex-row items-start"
                             >
                                 <View className="w-24 h-24 bg-gray-300 rounded-md ml-4" />
                                 <View className="flex-1 ml-4">

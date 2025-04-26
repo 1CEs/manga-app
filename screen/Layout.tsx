@@ -1,9 +1,8 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, ViewProps } from "react-native";
 import { Home } from "./Home";
 import { MangaDetail } from "./MangaDetail";
+import { ReadChapter } from "./ReadChapter";
 import { Ionicons } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator();
@@ -47,23 +46,24 @@ const TabNavigator = () => {
   );
 };
 
-type LayoutProps = ViewProps & {
-    children?: React.ReactNode;
-}
-
-export const Layout = ({ children, ...props }: LayoutProps) => {
+export const Layout = () => {
     return (
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="Main"
-                    component={TabNavigator}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="MangaDetail"
-                    component={MangaDetail}
-                    options={{ headerShown: false }}
-                />
-            </Stack.Navigator>
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Main"
+                component={TabNavigator}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="MangaDetail"
+                component={MangaDetail}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="ReadChapter"
+                component={ReadChapter}
+                options={{ headerShown: false }}
+            />
+        </Stack.Navigator>
     );
 };

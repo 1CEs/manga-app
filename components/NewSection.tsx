@@ -1,14 +1,36 @@
 import { useFetch } from "hooks/useFetch";
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+type RootStackParamList = {
+    MangaDetail: { manga: NewMangaType };
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const NewSection = () => {
     const url = process.env.EXPO_PUBLIC_API_URL!
+    const navigation = useNavigation<NavigationProp>();
 
     const { data, loading, error, refetch } = useFetch<NewMangaType[]>(`${url}/api/v1/new`);
 
     if (error) {
         return (
-            <Text>Error: {error.message}</Text>
+            <SafeAreaView className="flex-1 pt-10 bg-background">
+                <View className="flex-1 px-4 items-center justify-center">
+                    <View className="bg-red-500/10 p-6 rounded-lg items-center w-full max-w-md">
+                        <Text className="text-red-500 text-lg font-bold mb-2">Error Loading Content</Text>
+                        <Text className="text-foreground text-center mb-4">{error.message}</Text>
+                        <TouchableOpacity
+                            onPress={refetch}
+                            className="bg-primary px-6 py-2 rounded-md"
+                        >
+                            <Text className="text-white font-bold">Retry</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </SafeAreaView>
         )
     }
 
@@ -44,6 +66,7 @@ export const NewSection = () => {
                             }}
                             key={index}
                             className="w-32 h-44 mr-6 flex-row items-center justify-center rounded-md relative"
+                            onPress={() => navigation.navigate('MangaDetail', { manga: item })}
                         >
                             <Text
                                 style={{
